@@ -187,7 +187,19 @@ void changeBoard(int m)
         board[m - 1] = 1;
     }
 }
+void computerMove() {
+ 
+    vector<int> validMoves;
 
+    for (int i = 0; i < 9; ++i) {
+        if (board[i] == -1) validMoves.push_back(i);
+    }
+    int CompMove = smartMove(validMoves);
+    wcout << "Computer's move: " << CompMove + 1 << endl;
+    if (token == 'O') board[CompMove] = 1;
+    else board[CompMove] = 0;
+    
+}
 void clearInput() {
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -241,7 +253,7 @@ void play(void)
         check_win();
         if(win) break;
         if (moves == 5) break;
-        smartMove();
+        computerMove();
         printGame();
         check_win();
         wcout << endl;
